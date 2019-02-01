@@ -1,5 +1,5 @@
-const {ApolloServer,gql}=require("apollo-server-express")
-const _=require("lodash")
+const {ApolloServer}=require("apollo-server-express")
+
 const app=require("express")()
 const typeDefs=require("./schema/typedefs.js")
 const resolvers=require("./schema/resolvers.js")
