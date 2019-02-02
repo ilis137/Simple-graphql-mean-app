@@ -1,6 +1,6 @@
 const _=require("lodash")
 const Book=require("../models/book")
-const Author=require("../models.author")
+const Author=require("../models/author")
 
 var books = [
   { name: 'Name of the Wind', genre: 'Fantasy', id: '1', authorId: '1' },
@@ -21,16 +21,16 @@ var authors = [
 const resolvers={
   Query:{
           book(parent,args){
-            return _.find(books,{id:args.id})
+            return Book.findById(args.id)
         },
           books(parent){
-            return books
+            return Book.find({})
         },
           author(parent,args){
-              return _.find(authors,{id:args.id})
+              return Author.findById(args.id)
         },
           authors(){
-            return authors
+            return Author.find({})
         }
         },
   Book:{
@@ -41,9 +41,26 @@ const resolvers={
   Author:{
             books(parent){
               return _.filter(books,{authorId:parent.id})
-      }
-  }
+         },
 
 
+  },
+  Mutation:{
+               addAuthor(parent,args){
+                 const author=new Author({
+                   name:args.name,
+                   age:args.age
+                 })
+               return author.save()
+             },
+             addBook(parent,args){
+                const book=new Book({
+                  title:args.title,
+                  genre:args.genre,
+                  authorId:args.authorId
+                })
+                return book.save()
+             }
+           }
 }
 module.exports=resolvers
