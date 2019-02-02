@@ -1,4 +1,7 @@
 const _=require("lodash")
+const Book=require("../models/book")
+const Author=require("../models.author")
+
 var books = [
   { name: 'Name of the Wind', genre: 'Fantasy', id: '1', authorId: '1' },
   { name: 'The Final Empire', genre: 'Fantasy', id: '2', authorId: '2' },
@@ -36,9 +39,9 @@ const resolvers={
       }
   },
   Author:{
-    books(parent){
-      return _.filter(books,{authorId:parent.id})
-    }
+            books(parent){
+              return _.filter(books,{authorId:parent.id})
+      }
   }
 
 
