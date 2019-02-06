@@ -4,8 +4,11 @@ const app=require("express")()
 
 const typeDefs=require("./schema/typedefs.js")
 const resolvers=require("./schema/resolvers.js")
+const cors=require("cors")
 
 require("dotenv").config()
+
+app.use(cors())
 
 mongoose.promise=global.promise
 mongoose.connect(process.env.mongoURL,{useNewUrlParser:true},()=>{
